@@ -1,0 +1,245 @@
+<script>
+
+if (!window.requestAnimationFrame) {
+  window.requestAnimationFrame = ( function() {
+   return false ||
+     //window.webkitRequestAnimationFrame ||
+     //window.mozRequestAnimationFrame || // comment out if FF4 is slow (it caps framerate at ~30fps: https://bugzilla.mozilla.org/show_bug.cgi?id=630127)
+     //window.oRequestAnimationFrame ||
+     //window.msRequestAnimationFrame ||
+     function( /* function FrameRequestCallback */ callback, /* DOMElement Element */ element ) {
+       window.setTimeout( callback, 1000 / 60 );
+     };
+  })();
+}
+
+function Vec2(x, y) {
+  this.x = x;
+  this.y = y;
+}
+
+Vec2.prototype.add = function(v) {
+  this.x += v.x;
+  this.y += v.y;
+}
+
+Vec2.prototype.added = function(v) {
+  return new Vec2(this.x + v.x, this.y + v.y);
+}
+
+Vec2.prototype.subbed = function(v) {
+  return new Vec2(this.x - v.x, this.y - v.y);
+}
+
+Vec2.prototype.normalize = function() {
+  var len = Math.sqrt(this.x*this.x + this.y*this.y);
+  if (len > 0) {
+    this.x /= len;
+    this.y /= len;
+  }
+  return this;
+}
+
+Vec2.prototype.scale = function(f) {
+  this.x *= f;
+  this.y *= f;
+}
+
+Vec2.prototype.length = function() {
+  return Math.sqrt(this.x*this.x + this.y*this.y);
+}
+
+
+var deadIterations = 0;
+var canvas;
+var c; //canvas context
+var buds;
+var hormons;
+var hormonSize = 2;
+var hormonDeadZoneRadius = 10;
+var budSize = 1;
+var growthStep = 5;
+var splitChance = 0.4;
+
+var margin = 50;
+var numHormons = 1000;
+
+function init() {
+  var center = new Vec2(canvas.width/2, canvas.height/2);
+  var centerRadius = canvas.width * 0.4;
+
+  deadIterations = 0;
+
+  buds = [];
+
+  var numBuds = Math.floor(Math.random() * 4);
+  for(var i=0; i<numBuds; i++) {
+    var pos = new Vec2(Math.random() - 0.5, Math.random() - 0.5);
+    pos.normalize().scale(centerRadius);
+    pos.add(center);
+    buds.push([pos]);
+  }
+
+  hormons = [];
+
+  for(var i=0; i<numHormons; i++) {
+    var pos = new Vec2(
+      margin + Math.random() * (canvas.width - 2 * margin),
+      margin + Math.random() * (canvas.height - 2 * margin)
+    );
+
+    if (pos.subbed(center).length() > centerRadius) {
+      i--;
+      continue;
+    }
+
+    hormons.push({
+      state : 0,
+      position : pos
+    });
+  }
+}
+
+function iterate() {
+  var hormonsForBud = [];
+  for(var i=0; i<buds.length; i++) {
+    hormonsForBud.push([]);
+  }
+
+  for(var i=0; i<hormons.length; i++) {
+    var hormon = hormons[i];
+
+    if (hormon.state > 0) continue;
+
+    var minDist = 40;
+    var minDistTolerancy = 0.1;
+    var minDistIndices = [];
+    for(var j=0; j<buds.length; j++) {
+      var budPos = buds[j][buds[j].length - 1];
+      var dist = hormon.position.subbed(budPos).length();
+      if (dist < minDist) {
+        if (Math.abs(dist - minDist) < minDistTolerancy) {
+          minDistIndices.push(j);
+        }
+        else {
+          minDist = dist;
+          minDistIndices = [j];
+        }
+      }
+    }
+    if (minDistIndices.length > 0) {
+      for(var k=0; k<minDistIndices.length; k++) {
+        hormonsForBud[minDistIndices[k]].push(i);
+      }
+    }
+    if (minDist < hormonDeadZoneRadius && minDistIndices.length > 0) {
+      hormon.state++;
+    }
+  }
+
+  var newBuds = [];
+
+  for(var i=0; i<buds.length; i++) {
+    if (hormonsForBud[i].length == 0) continue;
+
+    var budPos = buds[i][buds[i].length - 1];
+
+    var avgPos = new Vec2(0,0);
+    var avgPosCount = 0;
+    for(var j=0; j<hormonsForBud[i].length; j++) {
+      avgPos.add(hormons[hormonsForBud[i][j]].position);
+      avgPosCount++;
+    }
+    avgPos.scale(1/avgPosCount);
+
+    var dir = avgPos.subbed(budPos);
+    dir.normalize().scale(growthStep);
+    var nextPos = budPos.added(dir);
+    buds[i].push(nextPos);
+
+    if (Math.random() > (1.0 - splitChance)) {
+      newBuds.push([nextPos]);
+    }
+  }
+
+  for(var i=0; i<newBuds.length; i++) {
+    buds.push(newBuds[i]);
+  }
+
+  if (newBuds.length == 0) {
+    if (++deadIterations >= 20) {
+      init();
+    }
+  }
+}
+
+function draw() {
+  iterate();
+
+  c.fillStyle = "rgb(255, 255, 200)";
+  c.fillRect(0, 0, canvas.width, canvas.height);
+
+
+  for(var i=0; i<hormons.length; i++) {
+    var hormon = hormons[i];
+    if (hormon.state == 0) {
+      c.strokeStyle = "rgb(255, 220, 220)";
+      c.beginPath();
+      c.arc(hormon.position.x, hormon.position.y, hormonDeadZoneRadius, 0, Math.PI*2);
+      c.stroke();
+      c.closePath();
+      c.strokeStyle = "rgb(255, 100, 100)";
+
+    }
+    else if (hormon.state == 1) {
+      c.strokeStyle = "rgb(0, 255, 255)";
+    }
+
+    c.beginPath();
+    c.arc(hormon.position.x, hormon.position.y, hormonSize, 0, Math.PI*2);
+    c.stroke();
+    c.closePath();
+
+  }
+
+  c.fillStyle = "rgb(100, 200, 50)";
+  c.strokeStyle = "rgb(100, 200, 50)";
+
+  for(var i=0; i<buds.length; i++) {
+    c.beginPath();
+    c.arc(buds[i][0].x, buds[i][0].y, budSize, 0, Math.PI*2);
+    c.fill();
+    c.closePath()
+    for(var j=1; j<buds[i].length; j++) {
+      var prevBudPos = buds[i][j-1];
+      var budPos = buds[i][j];
+
+      c.beginPath();
+      c.moveTo(prevBudPos.x, prevBudPos.y);
+      c.lineTo(budPos.x, budPos.y)
+      c.stroke();
+      c.closePath()
+
+      c.beginPath();
+      c.arc(budPos.x, budPos.y, budSize, 0, Math.PI*2);
+      c.fill();
+      c.closePath()
+      // paint.setStroke();
+      // canvas.drawLine(paint, );
+      // paint.setFill();
+      // canvas.drawCircle(paint, );
+    }
+  }
+
+  requestAnimationFrame(draw, canvas);
+}
+
+window.onload = function() {
+  canvas = document.getElementById("canvas");
+  c = canvas.getContext('2d');
+
+  init();
+  requestAnimationFrame(draw, canvas);
+}
+
+</script>
