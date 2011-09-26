@@ -44,5 +44,23 @@
       <envvars/>
       <debugger/>
     </Extensions>
+    <Unit filename="src/ormon.h">
+      <Option virtualFolder="src"/>
+    </Unit>
+    <Unit filename="src/bud.h">
+      <Option virtualFolder="src"/>
+    </Unit>
+    <Unit filename="src/bud.cpp">
+      <Option virtualFolder="src"/>
+    </Unit>
+    <Unit filename="src/ormon.cpp">
+      <Option virtualFolder="src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorGraphics/src/ofxVectorGraphics.cpp">
+      <Option virtualFolder="addons/ofxVectorGraphics/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorGraphics/src/ofxVectorGraphics.h">
+      <Option virtualFolder="addons/ofxVectorGraphics/src"/>
+    </Unit>
   </Project>
 </CodeBlocks_project_file>
