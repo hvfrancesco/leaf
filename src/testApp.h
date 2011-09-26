@@ -1,7 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxVectorGraphics.h"
+#include <list>
+
+#include "bud.h"
+#include "ormon.h"
 
 class testApp : public ofBaseApp{
 
@@ -36,6 +39,9 @@ class testApp : public ofBaseApp{
 
         ofPoint center;
         float radius;
+
+        list<Bud> buds;
+        list<Ormon> ormons;
 
 
 };

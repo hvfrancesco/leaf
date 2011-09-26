@@ -21,6 +21,14 @@ void testApp::setup(){
         ofSetCircleResolution(36);
         deadIterations = 0;
 
+        ormons = list<Ormon>() ;
+
+        for (int i; i < numHormons; i++)
+        {
+            Ormon o;
+            o.setup(center, radius);
+            ormons.push_back(o);
+        }
 
 
 }
@@ -43,6 +51,14 @@ void testApp::draw(){
     ofSetHexColor(0x000000);
     ofNoFill();
     ofCircle(center.x, center.y, radius);
+
+    ofSetHexColor(0xFFFFFF);
+
+    for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
+    {
+        Ormon o = *oi;
+        ofCircle(o.x, o.y, 1);
+    }
 
     ofDisableAlphaBlending();
 
