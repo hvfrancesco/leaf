@@ -56,11 +56,35 @@
     <Unit filename="src/ormon.cpp">
       <Option virtualFolder="src"/>
     </Unit>
-    <Unit filename="../../../addons/ofxVectorGraphics/src/ofxVectorGraphics.cpp">
-      <Option virtualFolder="addons/ofxVectorGraphics/src"/>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxPoint3f.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
     </Unit>
-    <Unit filename="../../../addons/ofxVectorGraphics/src/ofxVectorGraphics.h">
-      <Option virtualFolder="addons/ofxVectorGraphics/src"/>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxPoint2f.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxMatrix4x4.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxVectorMath.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxQuaternion.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxMatrix3x3.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxVec2f.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxPoint4f.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxVec3f.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
+    </Unit>
+    <Unit filename="../../../addons/ofxVectorMath/src/ofxVec4f.h">
+      <Option virtualFolder="addons/ofxVectorMath/src"/>
     </Unit>
   </Project>
 </CodeBlocks_project_file>

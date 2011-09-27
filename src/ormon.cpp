@@ -16,4 +16,6 @@ void Ormon::update()
 void Ormon::draw()
 {
 
+    ofCircle(x, y, 4);
+
 }

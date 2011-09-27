@@ -246,11 +246,8 @@ obj/x86_64Debug/./src/main.d obj/x86_64Debug/./src/main.o: src/main.cpp \
  ../../../libs/openFrameworks/video/ofVideoPlayer.h \
  ../../../libs/openFrameworks/video/ofGstVideoPlayer.h \
  ../../../libs/openFrameworks/3d/ofCamera.h \
- ../../../libs/openFrameworks/3d/ofEasyCam.h src/testApp.h \
- ../../../addons/ofxVectorGraphics/src/ofxVectorGraphics.h \
- ../../../addons/ofxVectorGraphics/libs/CreEPS.hpp \
- ../../../addons/ofxVectorGraphics/libs/CreEPS_Types.hpp \
- ../../../libs/openFrameworks/app/ofAppGlutWindow.h \
+ ../../../libs/openFrameworks/3d/ofEasyCam.h src/testApp.h src/bud.h \
+ src/ormon.h ../../../libs/openFrameworks/app/ofAppGlutWindow.h \
  ../../../libs/openFrameworks/app/ofAppBaseWindow.h
 
 ../../../libs/openFrameworks/ofMain.h:
@@ -797,11 +794,9 @@ obj/x86_64Debug/./src/main.d obj/x86_64Debug/./src/main.o: src/main.cpp \
 
 src/testApp.h:
 
-../../../addons/ofxVectorGraphics/src/ofxVectorGraphics.h:
+src/bud.h:
 
-../../../addons/ofxVectorGraphics/libs/CreEPS.hpp:
-
-../../../addons/ofxVectorGraphics/libs/CreEPS_Types.hpp:
+src/ormon.h:
 
 ../../../libs/openFrameworks/app/ofAppGlutWindow.h:
 

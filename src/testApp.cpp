@@ -57,7 +57,7 @@ void testApp::draw(){
     for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
     {
         Ormon o = *oi;
-        ofCircle(o.x, o.y, 1);
+        o.draw();
     }
 
     ofDisableAlphaBlending();
