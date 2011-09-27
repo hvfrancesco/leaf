@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug" />
-	<File name="src/testApp.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="550" topLine="27" />
+	<ActiveTarget name="Release" />
+	<File name="src/bud.cpp" open="1" top="1" tabpos="5">
+		<Cursor position="337" topLine="1" />
+	</File>
+	<File name="src/bud.h" open="1" top="0" tabpos="6">
+		<Cursor position="76" topLine="1" />
+	</File>
+	<File name="src/ormon.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="254" topLine="0" />
+	</File>
+	<File name="src/ormon.h" open="1" top="0" tabpos="4">
+		<Cursor position="213" topLine="0" />
+	</File>
+	<File name="src/testApp.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="1548" topLine="65" />
 	</File>
 	<File name="src/testApp.h" open="1" top="0" tabpos="1">
-		<Cursor position="768" topLine="16" />
+		<Cursor position="773" topLine="24" />
 	</File>
 </CodeBlocks_layout_file>

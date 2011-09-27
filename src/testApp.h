@@ -37,7 +37,9 @@ class testApp : public ofBaseApp{
         int margin;
         int numHormons;
 
-        ofPoint center;
+        int numBuds;
+
+        ofVec2f center;
         float radius;
 
         list<Bud> buds;

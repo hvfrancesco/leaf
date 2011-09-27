@@ -5,8 +5,6 @@ void testApp::setup(){
 
         deadIterations = 0;
 
-        //var buds;
-        //var hormons;
         hormonSize = 2;
         hormonDeadZoneRadius = 10;
         budSize = 1;
@@ -15,6 +13,8 @@ void testApp::setup(){
 
         margin = 50;
         numHormons = 1000;
+        numBuds = 8;
+
         center.x = ofGetWindowWidth()/2;
         center.y = ofGetWindowHeight()/2;
         radius = ofGetWindowHeight()*0.4;
@@ -22,12 +22,20 @@ void testApp::setup(){
         deadIterations = 0;
 
         ormons = list<Ormon>() ;
+        buds = list<Bud>();
 
-        for (int i; i < numHormons; i++)
+        for (int i = 0; i < numHormons; i++)
         {
             Ormon o;
             o.setup(center, radius);
             ormons.push_back(o);
+        }
+
+        for (int i = 0; i < numBuds; i++)
+        {
+            Bud b;
+            b.setup(center, radius);
+            buds.push_back(b);
         }
 
 
@@ -36,6 +44,17 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
 
+    for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
+    {
+        Ormon o = *oi;
+        o.update();
+    }
+
+    for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
+    {
+        Bud b = *bi;
+        b.update();
+    }
 
 }
 
@@ -52,12 +71,17 @@ void testApp::draw(){
     ofNoFill();
     ofCircle(center.x, center.y, radius);
 
-    ofSetHexColor(0xFFFFFF);
 
     for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
     {
         Ormon o = *oi;
         o.draw();
+    }
+
+    for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
+    {
+        Bud b = *bi;
+        b.draw();
     }
 
     ofDisableAlphaBlending();

@@ -1,10 +1,10 @@
 # include "ormon.h"
 
-void Ormon::setup(ofPoint center, float radius)
+void Ormon::setup(ofVec2f center, float radius)
 {
 
-x = center.x + ofRandom(-radius, radius);
-y = center.y + ofRandom(-radius, radius);
+position.x = center.x + ofRandom(-radius, radius);
+position.y = center.y + ofRandom(-radius, radius);
 
 }
 
@@ -15,7 +15,7 @@ void Ormon::update()
 
 void Ormon::draw()
 {
-
-    ofCircle(x, y, 4);
+    ofSetHexColor(0xFFFFFF);
+    ofCircle(position.x, position.y, 2);
 
 }

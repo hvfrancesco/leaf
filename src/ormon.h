@@ -11,10 +11,11 @@ public:
     Ormon()
     {
     }
-    void setup(ofPoint center, float radius);
+
+    ofVec2f position;
+
+    void setup(ofVec2f center, float radius);
     void update();
     void draw();
-    int x;
-    int y;
 
 };

@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofGraphics.h"
+#include "ormon.h"
 
 
 class Bud
@@ -11,8 +12,13 @@ public:
     Bud()
     {
     }
-    void setup();
+
+    ofVec2f position;
+
+    void setup(ofVec2f center, float radius);
     void update();
     void draw();
+
+    list<Ormon> associatedOrmons;
 
 };
