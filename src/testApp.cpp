@@ -44,16 +44,21 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
 
-    for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
-    {
-        Ormon o = *oi;
-        o.update();
-    }
+
 
     for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
     {
         Bud b = *bi;
         b.update();
+    }
+
+    for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
+    {
+        Ormon o = *oi;
+        if (!o.dead) {
+            associateBud(o);
+            o.update();
+        }
     }
 
 }
@@ -131,4 +136,21 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){
 
+}
+
+void testApp::associateBud(Ormon o){
+
+    float minDist = 0;
+    Bud * closestBud;
+    for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
+    {
+        Bud b = *bi;
+        ofVec2f distVector = o.position - b.position;
+        float dist = distVector.length();
+        if ((minDist == 0) || (dist < minDist)) {
+            closestBud = &*bi;
+            minDist = dist;
+        }
+    }
+    closestBud->associatedOrmons.push_back(o);
 }

@@ -19,6 +19,7 @@ public:
     void update();
     void draw();
 
+    bool dead;
     list<Ormon> associatedOrmons;
 
 };

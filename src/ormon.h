@@ -12,6 +12,7 @@ public:
     {
     }
 
+    bool dead;
     ofVec2f position;
 
     void setup(ofVec2f center, float radius);
