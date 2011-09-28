@@ -14,8 +14,8 @@
 CVS/
 .svn/
 
-bin/hyphae
-bin/hyphae_debug
+bin/leaf
+bin/leaf_debug
 obj/*
 bin/data/_*.xml
 .frag
