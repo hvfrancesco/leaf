@@ -30,10 +30,10 @@ void Bud::randomGenerate(ofVec2f center, float radius, list<Bud> * buds)
 
     float r = ofRandom(0, radius);
     float angle = ofRandom(0, 2*PI);
-    position.x = center.x + (cos(angle)*r); // for a bud internal to the circle
-    position.y = center.y + (sin(angle)*r); // for a bud internal to the circle
-    //position.x = center.x + (cos(angle)*radius); // for a bud internal on the circle
-    //position.y = center.y + (sin(angle)*radius); // for a bud internal on the circle
+    //position.x = center.x + (cos(angle)*r); // for a bud internal to the circle
+    //position.y = center.y + (sin(angle)*r); // for a bud internal to the circle
+    position.x = center.x + (cos(angle)*radius); // for a bud internal on the circle
+    position.y = center.y + (sin(angle)*radius); // for a bud internal on the circle
 
     associatedOrmons = list<Ormon>();
     positions = list<ofVec2f>();

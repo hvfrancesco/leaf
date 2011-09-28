@@ -7,18 +7,19 @@ void testApp::setup()
     ofSetBackgroundAuto(true);
     ofBackground(255,255,255);
     bBackground = false;
+    bRecord = false;
 
     //deadIterations = 0;
 
     //hormonSize = 2;
-    hormonDeadZoneRadius = 3;
+    hormonDeadZoneRadius = 4;
     //budSize = 1;
     //growthStep = 5;
     //splitChance = 0.05;
 
     //margin = 50;
     numHormons = 10000;
-    numBuds = 3;
+    numBuds = 1;
 
     center.x = ofGetWindowWidth()/2;
     center.y = ofGetWindowHeight()/2;
@@ -105,6 +106,11 @@ void testApp::draw()
         Bud * b = &*bi;
         b->draw();
     }
+
+    if (bRecord) {
+        ofSaveFrame();
+    }
+
 }
 
 //--------------------------------------------------------------

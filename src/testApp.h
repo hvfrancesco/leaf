@@ -47,6 +47,7 @@ class testApp : public ofBaseApp{
         list<Ormon> ormons;
 
         bool bBackground;
+        bool bRecord;
 
 
 };
