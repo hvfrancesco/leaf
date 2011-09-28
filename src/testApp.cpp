@@ -6,16 +6,16 @@ void testApp::setup(){
         ofSetBackgroundAuto(true);
         ofBackground(255,255,255);
 
-        deadIterations = 0;
+        //deadIterations = 0;
 
-        hormonSize = 2;
+        //hormonSize = 2;
         hormonDeadZoneRadius = 10;
-        budSize = 1;
-        growthStep = 5;
-        splitChance = 0.4;
+        //budSize = 1;
+        //growthStep = 5;
+        //splitChance = 0.05;
 
-        margin = 50;
-        numHormons = 1000;
+        //margin = 50;
+        numHormons = 25000;
         numBuds = 8;
 
         center.x = ofGetWindowWidth()/2;
@@ -30,14 +30,14 @@ void testApp::setup(){
         for (int i = 0; i < numHormons; i++)
         {
             Ormon o;
-            o.setup(center, radius);
+            o.randomGenerate(center, radius);
             ormons.push_back(o);
         }
 
         for (int i = 0; i < numBuds; i++)
         {
             Bud b;
-            b.setup(center, radius);
+            b.randomGenerate(center, radius, &buds);
             buds.push_back(b);
         }
 
@@ -47,61 +47,55 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
 
-
-
     for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
     {
-        Bud b = *bi;
-        //b.clearAssociatedOrmons();
-        b.associatedOrmons.clear();
+        Bud * b = &*bi;
+        b->associatedOrmons.clear();
     }
 
     for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
     {
-        Ormon o = *oi;
-        if (!o.dead) {
+        Ormon * o = &*oi;
+        if (!o->dead) {
             associateBud(o);
-            o.update();
+            o->update();
         }
-
     }
 
     for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
     {
-        Bud b = *bi;
-        b.update();
+        Bud * b = &*bi;
+        b->update();
     }
-
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
 
     ofEnableAlphaBlending();
-
-    ofSetHexColor(0xBAE378);
+    ofSetColor(222,225,170,255);
     ofFill();
     ofCircle(center.x, center.y, radius);
-
-    ofSetHexColor(0x000000);
     ofNoFill();
-    ofCircle(center.x, center.y, radius);
+    ofDisableAlphaBlending();
 
+    for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
+    {
+        Bud * b = &*bi;
+        b->drawLinks();
+    }
 
     for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
     {
-        Ormon o = *oi;
-        o.draw();
+        Ormon * o = &*oi;
+        o->draw();
     }
 
     for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
     {
-        Bud b = *bi;
-        b.draw();
+        Bud * b = &*bi;
+        b->draw();
     }
-
-    ofDisableAlphaBlending();
-
 }
 
 //--------------------------------------------------------------
@@ -149,20 +143,20 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 
 }
 
-void testApp::associateBud(Ormon o){
+void testApp::associateBud(Ormon * o){
 
     float minDist = 0;
     Bud * closestBud;
     for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
     {
-        Bud b = *bi;
-        ofVec2f distVector = o.position - b.position;
+        Bud * b = &*bi;
+        ofVec2f distVector = o->position - b->position;
         float dist = distVector.length();
         if ((minDist == 0) || (dist < minDist)) {
             closestBud = &*bi;
             minDist = dist;
         }
     }
-    if (minDist < hormonDeadZoneRadius) {o.dead = true;}
-    closestBud->associatedOrmons.push_back(o);
+    if (minDist < hormonDeadZoneRadius) {o->dead = true;}
+    closestBud->associatedOrmons.push_back(*o);
 }

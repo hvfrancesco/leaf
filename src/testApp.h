@@ -23,7 +23,7 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-        void associateBud(Ormon o);
+        void associateBud(Ormon * o);
 
 		int deadIterations;
 
