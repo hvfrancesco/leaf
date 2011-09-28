@@ -18,8 +18,12 @@ public:
     void setup(ofVec2f center, float radius);
     void update();
     void draw();
+    void clearAssociatedOrmons();
 
     bool dead;
+    float velocity;
+
     list<Ormon> associatedOrmons;
+    list<ofVec2f> positions;
 
 };

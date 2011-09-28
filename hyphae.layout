@@ -2,21 +2,21 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
 	<File name="src/bud.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="512" topLine="20" />
+		<Cursor position="1143" topLine="27" />
 	</File>
 	<File name="src/bud.h" open="1" top="0" tabpos="6">
-		<Cursor position="243" topLine="1" />
+		<Cursor position="297" topLine="8" />
 	</File>
 	<File name="src/ormon.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="85" topLine="0" />
+		<Cursor position="254" topLine="3" />
 	</File>
 	<File name="src/ormon.h" open="1" top="0" tabpos="4">
 		<Cursor position="122" topLine="0" />
 	</File>
 	<File name="src/testApp.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="3336" topLine="139" />
+		<Cursor position="1213" topLine="48" />
 	</File>
 	<File name="src/testApp.h" open="1" top="0" tabpos="1">
-		<Cursor position="561" topLine="15" />
+		<Cursor position="557" topLine="15" />
 	</File>
 </CodeBlocks_layout_file>

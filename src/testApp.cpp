@@ -3,6 +3,9 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
+        ofSetBackgroundAuto(true);
+        ofBackground(255,255,255);
+
         deadIterations = 0;
 
         hormonSize = 2;
@@ -49,7 +52,8 @@ void testApp::update(){
     for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
     {
         Bud b = *bi;
-        b.update();
+        //b.clearAssociatedOrmons();
+        b.associatedOrmons.clear();
     }
 
     for (list<Ormon>::iterator oi = ormons.begin(); oi != ormons.end(); oi++)
@@ -59,6 +63,13 @@ void testApp::update(){
             associateBud(o);
             o.update();
         }
+
+    }
+
+    for (list<Bud>::iterator bi = buds.begin(); bi != buds.end(); bi++)
+    {
+        Bud b = *bi;
+        b.update();
     }
 
 }
@@ -68,7 +79,7 @@ void testApp::draw(){
 
     ofEnableAlphaBlending();
 
-    ofSetHexColor(0xeeddaa);
+    ofSetHexColor(0xBAE378);
     ofFill();
     ofCircle(center.x, center.y, radius);
 
@@ -152,5 +163,6 @@ void testApp::associateBud(Ormon o){
             minDist = dist;
         }
     }
+    if (minDist < hormonDeadZoneRadius) {o.dead = true;}
     closestBud->associatedOrmons.push_back(o);
 }
