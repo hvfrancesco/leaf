@@ -17,7 +17,7 @@ void Bud::setup(float x, float y, list<Bud> * buds)
     ofVec2f currentPosition;
     currentPosition.x = position.x;
     currentPosition.y = position.y;
-    //positions.push_back(currentPosition);
+    positions.push_back(currentPosition);
 }
 
 void Bud::randomGenerate(ofVec2f center, float radius, list<Bud> * buds)
@@ -41,7 +41,7 @@ void Bud::randomGenerate(ofVec2f center, float radius, list<Bud> * buds)
     ofVec2f currentPosition;
     currentPosition.x = position.x;
     currentPosition.y = position.y;
-    //positions.push_back(currentPosition);
+    positions.push_back(currentPosition);
 }
 
 void Bud::update()

@@ -46,5 +46,7 @@ class testApp : public ofBaseApp{
         list<Bud> buds;
         list<Ormon> ormons;
 
+        bool bBackground;
+
 
 };
