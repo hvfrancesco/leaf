@@ -6,7 +6,7 @@ void testApp::setup()
 
     ofSetBackgroundAuto(true);
     ofBackground(255,255,255);
-    bBackground = false;
+    bBackground = true;
     bRecord = false;
 
     //deadIterations = 0;
@@ -19,7 +19,7 @@ void testApp::setup()
 
     //margin = 50;
     numHormons = 10000;
-    numBuds = 1;
+    numBuds = 3;
 
     center.x = ofGetWindowWidth()/2;
     center.y = ofGetWindowHeight()/2;
